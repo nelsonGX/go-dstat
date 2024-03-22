@@ -30,7 +30,7 @@ func main() {
 		http.ServeFile(w, r, "index.html")
 	})
 	http.HandleFunc("/ws", ws)
-	http.HandleFunc("/dstat", func(rw http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/dthis", func(rw http.ResponseWriter, r *http.Request) {
 		atomic.AddInt64(&count, 1)
 		rw.WriteHeader(http.StatusOK)
 	})
@@ -49,7 +49,7 @@ func main() {
 		}
 	}()
 
-	err := http.ListenAndServe("localhost:8080", nil)
+	err := http.ListenAndServe("0.0.0.0:80", nil)
 	if err != nil {
 		log.Fatal(err)
 	}

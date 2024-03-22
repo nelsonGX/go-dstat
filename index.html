@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Layer7 - DSTAT</title>
+    <title>L7 - 攻擊測試</title>
     <style>
         html,
         body {
@@ -57,7 +57,7 @@
                     type: 'area'
                 },
                 title: {
-                    text: 'Layer7 DSTAT'
+                    text: 'L7 攻擊測試'
                 },
                 xAxis: {
                     type: 'datetime'
@@ -68,14 +68,17 @@
                     }
                 },
                 series: [{
-                    name: 'Requests',
+                    name: '請求',
                     data: []
                 }]
             });
 
-            info.innerText = "Capturing requests from " + location.host + "/dstat";
+            info.innerText = "打這裡 --> " + location.host + "/dthis";
 
-            let ws = new WebSocket("ws://" + location.host + "/ws");
+            let ws = new WebSocket(
+	          (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/ws"
+            );
+
 
             ws.onmessage = (event) => {
                 let requests = Number(event.data);
